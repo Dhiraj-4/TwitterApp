@@ -1,6 +1,7 @@
 import express from 'express';
 import { PORT } from './config/serverConfig.js';
 import apiRouter from './routes/apiRoutes.js'
+import { connectDB } from './config/dbConfig.js';
 
 const app = express();
 
@@ -32,4 +33,5 @@ app.all('*', (req,res) => { // this piece of code does not work in express 5
 
 app.listen(PORT, () => {
     console.log(`Server is up on port ${ PORT }`);
+    connectDB();
 })
