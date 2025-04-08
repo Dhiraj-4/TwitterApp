@@ -1,5 +1,5 @@
 import { Filter } from 'bad-words';
-import { createTweet as createTweetRepository } from '../repositories/tweetRepository.js';
+import { createTweet as createTweetRepository, getTweets as getTweetsRepository } from '../repositories/tweetRepository.js';
 
 export const createTweet = async ({ body }) => {
 
@@ -13,7 +13,15 @@ export const createTweet = async ({ body }) => {
             status: 400,
         };
     }
+
     const tweet = await createTweetRepository({ body });
 
     return tweet;
+}
+
+export const getTweets = async () => {
+
+    const tweets = await getTweetsRepository();
+
+    return tweets;
 }

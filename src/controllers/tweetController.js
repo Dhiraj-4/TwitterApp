@@ -1,9 +1,26 @@
-import { createTweet as createTweetService } from "../services/tweetService.js";
+import { createTweet as createTweetService, getTweets as getTweetsService } from "../services/tweetService.js";
 
-export const getTweets = (req,res) => {
-    return res.json({
-        message: 'Welcome to the tweets route'
-    });
+export const getTweets = async (req,res) => {
+    // return res.json({
+    //     message: 'Welcome to the tweets route'
+    // });
+
+    try{
+        const response = await getTweetsService();
+
+        return res.json({
+            message: 'Got all Tweets Successfully',
+            data: response,
+            success: true,
+        })
+    }catch(error) {
+        console.log(error);
+        return res.status(500).json({
+            message: 'Internal server error',
+            success: false,
+        });
+    };
+
 };
 
 export const getTweetByID = (req,res) => {
