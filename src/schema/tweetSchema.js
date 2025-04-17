@@ -6,8 +6,12 @@ const tweetSchema = new mongoose.Schema({
         trim: true,
         required: true,
         maxlength: 280.        
+    },
+    image: {
+        type: String,
+        default: null
     }
-});
+}, { timestamps: true });
 
 const Tweet = mongoose.model('Tweet', tweetSchema);
 

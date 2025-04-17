@@ -31,9 +31,11 @@ export const getTweetByID = (req,res) => {
 };
 
 export const createTweet = async (req,res) => {
+    // console.log(req.file);
     try {
         const response = await createTweetService({
-            body: req.body.tweet
+            body: req.body.tweet,
+            image: req.file?.location
         });
         
         return res.status(201).json({
