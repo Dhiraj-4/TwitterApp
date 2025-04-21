@@ -2,10 +2,13 @@ import express from 'express';
 import { PORT } from './config/serverConfig.js';
 import apiRouter from './routes/apiRoutes.js'
 import { connectDB } from './config/dbConfig.js';
+import morgan from 'morgan';
 
 const app = express();
 
+app.use(morgan('combined'));
 app.use(express.json());
+app.use(express.urlencoded());
 
 app. set("view engine", "ejs");
 
@@ -26,7 +29,7 @@ app.get('/ping', (req,res) => {
 
 
 app.all('*', (req,res) => { // this piece of code does not work in express 5
-    return res.json({
+    return res.status(404).json({
         message: 'NOT FOUND',
     });
 });
